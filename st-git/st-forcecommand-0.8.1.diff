@@ -1,0 +1,21 @@
+diff --git a/x.c b/x.c
+index 00cb6b1..28181ab 100644
+--- a/x.c
++++ b/x.c
+@@ -1772,6 +1772,8 @@ run(void)
+ 	struct timespec drawtimeout, *tv = NULL, now, last, lastblink;
+ 	long deltatime;
+ 
++	ttyfd = ttynew(opt_line, shell, opt_io, opt_cmd);
++
+ 	/* Waiting for window mapping */
+ 	do {
+ 		XNextEvent(xw.dpy, &ev);
+@@ -1788,7 +1790,6 @@ run(void)
+ 		}
+ 	} while (ev.type != MapNotify);
+ 
+-	ttyfd = ttynew(opt_line, shell, opt_io, opt_cmd);
+ 	cresize(w, h);
+ 
+ 	clock_gettime(CLOCK_MONOTONIC, &last);

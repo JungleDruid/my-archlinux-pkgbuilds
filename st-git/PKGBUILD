@@ -10,8 +10,14 @@ options=('zipman')
 depends=('libxft' 'libxext' 'zsh' 'adobe-source-code-pro-fonts')
 makedepends=('ncurses' 'libxext' 'git')
 epoch=1
-source=('git://git.suckless.org/st' 'config.h')
-sha1sums=('SKIP' 'SKIP')
+source=('git://git.suckless.org/st'
+        'config.h'
+        'https://st.suckless.org/patches/hidecursor/st-hidecursor-0.8.1.diff'
+        'st-forcecommand-0.8.1.diff')
+sha256sums=('SKIP'
+            '28248b1dce00bcc5f7f130403c388cfe2d2ce0204b7788ded0604b3d60a444d2'
+            'bf3fe4e855f67fc9ae69b7328399ce06567f6aae3c9fb7fc8e7ec26c89e41dfd'
+            'c634fe32cecd2743c3facd9f9221ec972486f544871bcbb77203a637cce965cc')
 
 provides=("${_pkgname}")
 conflicts=("${_pkgname}")
@@ -25,7 +31,16 @@ prepare() {
   cd "${_pkgname}"
   # skip terminfo which conflicts with nsurses
   sed -i '/tic /d' Makefile
-  cp $srcdir/config.h config.h
+	for file in "${source[@]}"; do
+		if [[ "$file" == "config.h" ]]; then
+			# add config.h if present in source array
+			# Note: this supersedes the above sed to config.def.h
+			cp "$srcdir/$file" .
+		elif [[ "$file" == *.diff || "$file" == *.patch ]]; then
+			# add all patches present in source array
+			patch -Np1 <"$srcdir/$(basename ${file})"
+		fi
+	done
 }
 
 build() {
