@@ -15,7 +15,7 @@ source=('git://git.suckless.org/st'
         'https://st.suckless.org/patches/hidecursor/st-hidecursor-0.8.1.diff'
         'st-forcecommand-0.8.1.diff')
 sha256sums=('SKIP'
-            '28248b1dce00bcc5f7f130403c388cfe2d2ce0204b7788ded0604b3d60a444d2'
+            '4861b43590487a002b7a286654fbef40bbba23228beada83d4b438aed01e49b9'
             'bf3fe4e855f67fc9ae69b7328399ce06567f6aae3c9fb7fc8e7ec26c89e41dfd'
             'c634fe32cecd2743c3facd9f9221ec972486f544871bcbb77203a637cce965cc')
 
