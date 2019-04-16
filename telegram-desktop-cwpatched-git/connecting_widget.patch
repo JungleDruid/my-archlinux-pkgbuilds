@@ -1,0 +1,17 @@
+diff --git a/Telegram/SourceFiles/window/window_connecting_widget.cpp b/Telegram/SourceFiles/window/window_connecting_widget.cpp
+index 51aad47a8..9f7764964 100644
+--- a/Telegram/SourceFiles/window/window_connecting_widget.cpp
++++ b/Telegram/SourceFiles/window/window_connecting_widget.cpp
+@@ -203,9 +203,11 @@ ConnectionState::ConnectionState(
+ 		visibility()
+ 	) | rpl::start_with_next([=](bool shown, float64 visible) {
+ 		if (!shown || visible == 0.) {
+-			_widget = nullptr;
++			if (_widget) _widget->setVisible(false);
+ 		} else if (!_widget) {
+ 			createWidget();
++		} else {
++			_widget->setVisible(true);
+ 		}
+ 	}, _lifetime);
+ 
