@@ -1,6 +1,6 @@
 # Maintainer: Lenovsky <lenovsky@pm.me>
 
-pkgname=telegram-desktop-cwpatched-git
+pkgname=telegram-desktop-cwpatched
 pkgver=1.6.7.r1.gedc8c2377
 pkgrel=1
 pkgdesc="Official desktop version of Telegram messaging app (dev branch)"
