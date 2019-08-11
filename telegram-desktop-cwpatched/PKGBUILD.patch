@@ -1,0 +1,37 @@
+diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
+index 8a30614..94e0853 100644
+--- a/trunk/PKGBUILD
++++ b/trunk/PKGBUILD
+@@ -4,7 +4,7 @@
+ # Thanks Nicholas Guriev <guriev-ns@ya.ru> for the patches!
+ # https://github.com/mymedia2/tdesktop
+ 
+-pkgname=telegram-desktop
++pkgname=telegram-desktop-cwpatched
+ pkgver=1.8.1
+ pkgrel=1
+ pkgdesc='Official Telegram Desktop client'
+@@ -16,6 +16,7 @@ makedepends=('cmake' 'git' 'gyp' 'range-v3' 'python' 'libappindicator-gtk3')
+ optdepends=('libnotify: desktop notifications'
+             'ttf-opensans: default Open Sans font family')
+ source=(
++    "connecting_widget.patch"
+     "tdesktop::git+https://github.com/telegramdesktop/tdesktop.git#tag=v$pkgver"
+     "libtgvoip::git+https://github.com/telegramdesktop/libtgvoip"
+     "variant::git+https://github.com/mapbox/variant"
+@@ -42,6 +43,7 @@ sha512sums=('SKIP'
+             'SKIP'
+             'SKIP'
+             'SKIP'
++            'SKIP'
+             'b87414ceaae19185a8a5749cea1f6d9f3fc3c69b8dd729e3db8790cde00b987c3c827cd30baf0eac579d1884e34aa2f37bb90778c3c0bc9ca211d75a82891b9d'
+             '16874fabcb0d04d6bf8db1ee2fd77fbd09eeb6acc28bb5fd915d378f7a5ed7ebf4aae01c390e516695572cf9ef0e2cb59493e21a35643fd63ddf3fec446858a6'
+             '3b6a0450f7981c2ce5f90c1ea46d9fb504194609f357b957b5c4a741681d3c531252394df116f8b77780a3a110783c047c9a081f9651e0792e7423573e390392'
+@@ -73,6 +75,7 @@ prepare() {
+ 
+     # disable static-qt for rlottie
+     sed "/RLOTTIE_WITH_STATIC_QT/d" -i "$srcdir/tdesktop/Telegram/gyp/lib_rlottie.gyp"
++    patch -Np1 -i "$srcdir/connecting_widget.patch"
+ 
+     cd "$srcdir/tdesktop"
+     cd "Telegram/ThirdParty/libtgvoip"

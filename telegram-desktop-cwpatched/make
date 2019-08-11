@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [[ -d ./community ]]; then
+  cd community
+  git remote update
+  if [[ $(git status | grep behind | wc -l) == 0 ]]; then
+    echo Package is up to date.
+    exit
+  fi
+fi
+rm -rf community
+git clone git://git.archlinux.org/svntogit/community.git --single-branch -b packages/telegram-desktop
+cp PKGBUILD.patch community
+cp connecting_widget.patch community/trunk
+cd community
+patch -Np1 -i PKGBUILD.patch
+cd trunk
+makepkg -si
