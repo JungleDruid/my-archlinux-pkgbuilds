@@ -15,4 +15,5 @@ cp connecting_widget.patch community/trunk
 cd community
 patch -Np1 -i PKGBUILD.patch
 cd trunk
+sed 's/^pkgname=telegram-desktop$/pkgname=telegram-desktop-cwpatched/' -i PKGBUILD
 makepkg -si
